@@ -1,0 +1,4 @@
+9/5/2020 - Project has been started.
+10/5/2020 - Name has been changed to s1mpl3 from Simple Project. Beljic has joined me in developing this project as a sprite maker.
+11/5/2020 - Nothing has been done. I took a day off.
+12/5/2020 - Loading screen added, XP "bar" and username input.

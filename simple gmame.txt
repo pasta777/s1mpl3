@@ -1,0 +1,49 @@
+������������������������������������������������������������������������������������������������������������������������js
+
+character:
+
+	level: 100exp 1 lvl, 200exp 2 lvl, 300xp 3 lvl... max 10 lvl 1000xp / 100hp, +5hp, +12hp, +18hp, +21hp, +23hp (every two levels)
+
+	attack: 1dmg per click, 2dmg per click, 3dmg and so on
+
+	wallet: 0c(default), 1000c(max)
+
+shop:
+	fist(default) 0c
+	
+	kitchen knife: +1dmg 50c
+
+	simple sword: +2dmg 80c
+
+	large sword: +3dmg 100c
+
+	ww1 pistol: +4dmg 210c
+
+	machine pistol: +5dmg 260c
+
+	machine gun: +6dmg 400c
+
+monsters:
+		
+	cube: 12hp, attacks every 12s, 12exp, 12c, 
+
+	enhanced cube: 13hp, attacks every 11.8s, 13exp, 13c
+
+	pyramid: 8hp, ae 8s, 8exp, 8c
+
+	egyptian pyramid: 9hp, ae 8.8s, 9c
+
+	octagon: 8hp, ae 4s, 8c
+
+	line: 5hp, ae 2s, 8c
+
+	zigzag: 15hp, ae 5s, 8c
+
+boss:
+
+	cubie: 30hp, ae 5s, 30s�
+�������������������������������������������������
+
+	
+
+
