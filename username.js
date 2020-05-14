@@ -1,2 +1,17 @@
 var username = document.getElementById("username-ex");
-username.innerText = prompt("Enter your username");
+var EYU = prompt("Enter your username");
+if (EYU === "") {
+    if(alert("Please enter your username to start the game!")){
+
+    }
+    else    window.location.reload(); 
+}
+else if (EYU) {
+    username.innerText = EYU;
+}
+else {
+    if(alert("Please enter your username to start the game!")){
+
+    }
+    else    window.location.reload(); 
+}

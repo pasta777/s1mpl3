@@ -24,23 +24,23 @@
             <ul id="stats">
                 <li>
                     <p>Level</p>
-                    <p>1</p>
+                    <p id="user-lvl"></p>
                 </li>
                 <li>
                     <p>XP</p>
-                    <p>0/100</p>
+                    <p id="user-xp"></p><p>/</p><p id="user-xp-limit"></p>
                 </li>
                 <li>
                     <p>Attack</p>
-                    <p>1</p>
+                    <p id="user-attack"></p>
                 </li>
                 <li>
                     <p>HP</p>
-                    <p>100</p>
+                    <p id="user-hp"></p>
                 </li>
                 <li>
                     <p>Balance</p>
-                    <p>0</p><span>c</span>
+                    <p id="user-balance"></p><span>c</span>
                 </li>
             </ul>
         </div>
@@ -79,18 +79,26 @@
         <footer></footer>
     </div>
     <div id="center">
+        <div id="mon-name-con">
+            <h1 id="mon-name"></h1>
+        </div>
         <div id="mon-img">
-            <img src="img/cube.png" alt="">
+            <img id="mon-img-c" src="img/cube.png" alt="">
         </div>
         <div id="mon-stats">
-            <h3>HP <span>100</span></h3>
+            <h3>HP <span id="mon-hp"></span></h3>
         </div>
     </div>
-    <div id="overlay" class="opened">
-        <h1 id="loading">Loading...</h1>
+    <div id="overlay">
+        <div id="game-over-o">
+            <h1 id="game-over">Game Over</h1>
+            <p>Please refresh the page to try again</p>
+        </div>
     </div>
 
     <script src="username.js"></script>
+    <script src="main.js"></script>
+    
 
 </body>
 
