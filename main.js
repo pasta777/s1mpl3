@@ -235,7 +235,6 @@ function userAttack() {
         userLevelUp();
     }
 }
-var bigboy;
 function buyEquip(e) {
     var target = e.target || e.srcElement;
     var equipped = document.querySelector(".equipped");
@@ -251,7 +250,6 @@ function buyEquip(e) {
                 uBalance.innerText = user.balance;
                 uAttack.innerText = user.attack+" + "+user.equippedItem;
                 bigboy = shopList[i].obj.parentElement;
-                console.log(bigboy);
                 if(bigboy.childElementCount === 3) {
                     bigboy.removeChild(bigboy.lastElementChild);
                     bigboy.removeChild(bigboy.lastElementChild);
