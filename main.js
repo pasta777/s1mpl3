@@ -1,12 +1,27 @@
 // MAIN
+// user database
 var user = {
     HP: 100,
     attack: 1,
     XP: 0,
     limitXP: 100,
     level: 1,
-    balance: 0
-}
+    balance: 0,
+    equippedItem: 0
+};
+var uHP = document.getElementById("user-hp");
+var uXP = document.getElementById("user-xp");
+var uXPLimit = document.getElementById("user-xp-limit");
+var uBalance = document.getElementById("user-balance");
+var uLevel = document.getElementById("user-lvl");
+var uAttack = document.getElementById("user-attack");
+uHP.innerText = user.HP;
+uXP.innerText = user.XP;
+uXPLimit.innerText = user.limitXP;
+uBalance.innerText = user.balance;
+uLevel.innerText = user.level;
+uAttack.innerText = user.attack+" + "+user.equippedItem;
+// monster database
 var mCube = {
     name: "Cube",
     originalHP: 12,
@@ -95,24 +110,52 @@ var mbCubie = {
     ID: 7,
     img: "img/cubie.png"
 };
-var gameOver = document.getElementById("overlay");
-var uHP = document.getElementById("user-hp");
-var uXP = document.getElementById("user-xp");
-var uXPLimit = document.getElementById("user-xp-limit");
-var uBalance = document.getElementById("user-balance");
-var uLevel = document.getElementById("user-lvl");
-var uAttack = document.getElementById("user-attack");
-uHP.innerText = user.HP;
-uXP.innerText = user.XP;
-uXPLimit.innerText = user.limitXP;
-uBalance.innerText = user.balance;
-uLevel.innerText = user.level;
-uAttack.innerText = user.attack;
 var monsters = [mCube, mECube, mPyramid, mEPyramid, mOctagone, mLine, mZigzag, mbCubie];
 var mImg = document.getElementById("mon-img-c");
 var mName = document.getElementById("mon-name");
 var mHP = document.getElementById("mon-hp");
+var mAttackSpeed;
 var mNumber;
+// shop database
+var iFist = {
+    attack: 0,
+    obj: document.getElementsByClassName("item")[0],
+    price: 0
+};
+var iKitchenKnife = {
+    attack: 1,
+    obj: document.getElementsByClassName("item")[1],
+    price: 100
+};
+var iSimpleSword = {
+    attack: 2,
+    obj: document.getElementsByClassName("item")[2],
+    price: 160
+};
+var iLargeSword = {
+    attack: 3,
+    obj: document.getElementsByClassName("item")[3],
+    price: 200
+};
+var iSimplePistol = {
+    attack: 4,
+    obj: document.getElementsByClassName("item")[4],
+    price: 420
+};
+var iAutoPistol = {
+    attack: 5,
+    obj: document.getElementsByClassName("item")[5],
+    price: 520
+};
+var iMachineGun = {
+    attack: 6,
+    obj: document.getElementsByClassName("item")[6],
+    price: 800
+};
+var shopList = [iFist, iKitchenKnife, iSimpleSword, iLargeSword, iSimplePistol, iAutoPistol, iMachineGun];
+// overlays
+var gameOver = document.getElementById("overlay");
+// functions
 function userLevelUp() {
     user.level+=1;
     user.XP = 0;
@@ -122,44 +165,103 @@ function userLevelUp() {
     uXP.innerText = user.XP;
     uHP.innerText = user.HP;
     uLevel.innerText = user.level;
-    uAttack.innerText = user.attack;
+    uAttack.innerText = user.attack+" + "+user.equippedItem;
     uXPLimit.innerText = user.limitXP;
+    uXP.classList.add("lime");
+    uXPLimit.classList.add("lime");
+    uHP.classList.add("lime");
+    uLevel.classList.add("aqua");
+    uAttack.classList.add("lime");
+    setTimeout(function() {
+        uXP.classList.remove("lime");
+        uXPLimit.classList.remove("lime");
+        uHP.classList.remove("lime");
+        uLevel.classList.remove("aqua");
+        uAttack.classList.remove("lime");
+    }, 750);
     if (user.level === 10) {
         user.XP = "-";
         uXP.innerText = user.XP;
     }
 };
-var attackSpeed;
 function respawnMonster() {
     mNumber =  Math.floor(Math.random() * 8);
     mImg.setAttribute("src", monsters[mNumber].img);
     mName.innerText = monsters[mNumber].name;
     mHP.innerText = monsters[mNumber].HP;
-    attackSpeed = monsters[mNumber].attackSpeed;
+    mAttackSpeed = monsters[mNumber].attackSpeed;
 };
 respawnMonster();
 setInterval(function() {
-    user.HP-=monsters[mNumber].attack;
+    user.HP -= monsters[mNumber].attack;
+    uHP.classList.add("red");
     uHP.innerText = user.HP;
-    if(user.HP <= 0) {
+    if(user.HP > 0) {
+        setTimeout(function () {
+            uHP.classList.remove("red");
+        }, 750);
+    }
+    if (user.HP <= 0) {
         gameOver.classList.add("opened");
         user.HP = 0;
         uHP.innerText = user.HP;
     }
-}, attackSpeed);
+}, mAttackSpeed);
+function monsterKilled() {
+    uXP.classList.add("lime");
+    uBalance.classList.add("gold");
+    setTimeout(function() {
+        uXP.classList.remove("lime");
+        uBalance.classList.remove("gold");
+    }, 750);
+}
 function userAttack() {
-    monsters[mNumber].HP-=user.attack;
+    monsters[mNumber].HP-=user.attack+user.equippedItem;
     mHP.innerText = monsters[mNumber].HP;
+    mHP.classList.add("red");
+    setTimeout(function() {
+        mHP.classList.remove("red");
+    }, 750);
     if(monsters[mNumber].HP <= 0) {
         user.XP+=monsters[mNumber].yieldXP;
         user.balance+=monsters[mNumber].yieldC;
         uXP.innerText = user.XP;
         uBalance.innerText = user.balance;
         monsters[mNumber].HP = monsters[mNumber].originalHP;
+        monsterKilled();
         respawnMonster();
     }
     if (user.XP >= user.limitXP) {
         userLevelUp();
     }
 }
+var bigboy;
+function buyEquip(e) {
+    var target = e.target || e.srcElement;
+    var equipped = document.querySelector(".equipped");
+    for(var i = 0; i<shopList.length;i++) {
+        if(target === shopList[i].obj) {
+            if(user.balance >= shopList[i].price) {
+                user.equippedItem = shopList[i].attack;
+                user.balance-=shopList[i].price;
+                shopList[i].price = 0;
+                shopList[i].obj.classList.add("bought");
+                equipped.classList.remove("equipped");
+                shopList[i].obj.classList.add("equipped");
+                uBalance.innerText = user.balance;
+                uAttack.innerText = user.attack+" + "+user.equippedItem;
+                bigboy = shopList[i].obj.parentElement;
+                console.log(bigboy);
+                if(bigboy.childElementCount === 3) {
+                    bigboy.removeChild(bigboy.lastElementChild);
+                    bigboy.removeChild(bigboy.lastElementChild);
+                }
+                
+            }
+        }
+    }
+}
 mImg.addEventListener("click", userAttack);
+for(var i = 0; i<shopList.length; i++) {
+    shopList[i].obj.addEventListener("click", buyEquip);
+}

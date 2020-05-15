@@ -10,6 +10,9 @@ li {
     text-decoration: none;
     list-style: none;
 }
+li p {
+    transition: cubic-bezier(0.6, 0.04, 0.98, 0.335) 0.1s;
+}
 #title {
     text-align: center;
     background: rgb(46, 46, 46);
@@ -76,8 +79,14 @@ li {
     margin: 10px 5px 25px 5px;
     font-size: 18px;
 }
+.item {
+    cursor: pointer;
+}
+.bought {
+    color: #d87093;
+}
 .equipped {
-    color: rgb(91, 172, 219);
+    color: #afeeee;
 }
 footer {
     height: 50px;
@@ -122,3 +131,18 @@ footer {
     font-size: 4rem;
     line-height: 0.9;
 }
+.aqua, .lime, .red, .gold {
+    transition: cubic-bezier(0.6, 0.04, 0.98, 0.335) 0.1s;
+}
+.aqua {
+    color: #afeeee;
+}
+.lime {
+    color: #98fb98;
+}
+.red {
+    color: #d87093;
+}
+.gold {
+    color: #eee8aa;
+} 
