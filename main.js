@@ -1,6 +1,6 @@
 // MAIN
 // user database
-var user = {
+const user = {
     HP: 100,
     attack: 1,
     XP: 0,
@@ -9,12 +9,12 @@ var user = {
     balance: 0,
     equippedItem: 0
 };
-var uHP = document.getElementById("user-hp");
-var uXP = document.getElementById("user-xp");
-var uXPLimit = document.getElementById("user-xp-limit");
-var uBalance = document.getElementById("user-balance");
-var uLevel = document.getElementById("user-lvl");
-var uAttack = document.getElementById("user-attack");
+const uHP = document.getElementById("user-hp");
+const uXP = document.getElementById("user-xp");
+const uXPLimit = document.getElementById("user-xp-limit");
+const uBalance = document.getElementById("user-balance");
+const uLevel = document.getElementById("user-lvl");
+const uAttack = document.getElementById("user-attack");
 uHP.innerText = user.HP;
 uXP.innerText = user.XP;
 uXPLimit.innerText = user.limitXP;
@@ -22,7 +22,7 @@ uBalance.innerText = user.balance;
 uLevel.innerText = user.level;
 uAttack.innerText = user.attack+" + "+user.equippedItem;
 // monster database
-var mCube = {
+const mCube = {
     name: "Cube",
     originalHP: 12,
     HP: 12,
@@ -33,7 +33,7 @@ var mCube = {
     ID: 0,
     img: "img/cube.png"
 };
-var mECube = {
+const mECube = {
     name: "Enhanced Cube",
     originalHP: 13,
     HP: 13,
@@ -44,7 +44,7 @@ var mECube = {
     ID: 1,
     img: "img/cube_e.png"
 };
-var mPyramid = {
+const mPyramid = {
     name: "Pyramid",
     originalHP: 8,
     HP: 8,
@@ -55,7 +55,7 @@ var mPyramid = {
     ID: 2,
     img: "img/pyramid.png"
 };
-var mEPyramid = {
+const mEPyramid = {
     name: "Egyptian Pyramid",
     originalHP: 9,
     HP: 9,
@@ -66,7 +66,7 @@ var mEPyramid = {
     ID: 3,
     img: "img/pyramid_e.png"
 }
-var mOctagone = {
+const mOctagone = {
     name: "Octagone",
     originalHP: 8,
     HP: 8,
@@ -77,7 +77,7 @@ var mOctagone = {
     ID: 4,
     img: "img/octagone.png"
 };
-var mLine = {
+const mLine = {
     name: "Line",
     originalHP: 5,
     HP: 5,
@@ -88,7 +88,7 @@ var mLine = {
     ID: 5,
     img: "img/line.png"
 };
-var mZigzag = {
+const mZigzag = {
     name: "Zigzag",
     originalHP: 15,
     HP: 15,
@@ -99,7 +99,7 @@ var mZigzag = {
     ID: 6,
     img: "img/zigzag.png"
 };
-var mbCubie = {
+const mbCubie = {
     name: "Ⓑ Cubie",
     originalHP: 30,
     HP: 30,
@@ -110,53 +110,53 @@ var mbCubie = {
     ID: 7,
     img: "img/cubie.png"
 };
-var monsters = [mCube, mECube, mPyramid, mEPyramid, mOctagone, mLine, mZigzag, mbCubie];
-var mImg = document.getElementById("mon-img-c");
-var mName = document.getElementById("mon-name");
-var mHP = document.getElementById("mon-hp");
-var mAttackSpeed;
-var mNumber;
+let monsters = [mCube, mECube, mPyramid, mEPyramid, mOctagone, mLine, mZigzag, mbCubie];
+const mImg = document.getElementById("mon-img-c");
+const mName = document.getElementById("mon-name");
+const mHP = document.getElementById("mon-hp");
+let mAttackSpeed;
+let mNumber;
 // shop database
-var iFist = {
+const iFist = {
     attack: 0,
     obj: document.getElementsByClassName("item")[0],
     price: 0
 };
-var iKitchenKnife = {
+const iKitchenKnife = {
     attack: 1,
     obj: document.getElementsByClassName("item")[1],
     price: 100
 };
-var iSimpleSword = {
+const iSimpleSword = {
     attack: 2,
     obj: document.getElementsByClassName("item")[2],
     price: 160
 };
-var iLargeSword = {
+const iLargeSword = {
     attack: 3,
     obj: document.getElementsByClassName("item")[3],
     price: 200
 };
-var iSimplePistol = {
+const iSimplePistol = {
     attack: 4,
     obj: document.getElementsByClassName("item")[4],
     price: 420
 };
-var iAutoPistol = {
+const iAutoPistol = {
     attack: 5,
     obj: document.getElementsByClassName("item")[5],
     price: 520
 };
-var iMachineGun = {
+const iMachineGun = {
     attack: 6,
     obj: document.getElementsByClassName("item")[6],
     price: 800
 };
-var shopList = [iFist, iKitchenKnife, iSimpleSword, iLargeSword, iSimplePistol, iAutoPistol, iMachineGun];
+let shopList = [iFist, iKitchenKnife, iSimpleSword, iLargeSword, iSimplePistol, iAutoPistol, iMachineGun];
 // overlays
-var gameOver = document.getElementById("overlay");
+const gameOver = document.getElementById("overlay");
 // functions
-function userLevelUp() {
+let userLevelUp = () => {
     user.level+=1;
     user.XP = 0;
     user.HP+=50;
@@ -180,11 +180,16 @@ function userLevelUp() {
         uAttack.classList.remove("lime");
     }, 750);
     if (user.level === 10) {
-        user.XP = "-";
+        Object.defineProperty(user, "XP", {
+            value: "-",
+            writable: false,
+            enumerable: true,
+            configurable: true
+        })
         uXP.innerText = user.XP;
     }
 };
-function respawnMonster() {
+let respawnMonster = () => {
     mNumber =  Math.floor(Math.random() * 8);
     mImg.setAttribute("src", monsters[mNumber].img);
     mName.innerText = monsters[mNumber].name;
@@ -207,7 +212,7 @@ setInterval(function() {
         uHP.innerText = user.HP;
     }
 }, mAttackSpeed);
-function monsterKilled() {
+let monsterKilled = () => {
     uXP.classList.add("lime");
     uBalance.classList.add("gold");
     setTimeout(function() {
@@ -215,7 +220,7 @@ function monsterKilled() {
         uBalance.classList.remove("gold");
     }, 750);
 }
-function userAttack() {
+let userAttack = () => {
     monsters[mNumber].HP-=user.attack+user.equippedItem;
     mHP.innerText = monsters[mNumber].HP;
     mHP.classList.add("red");
@@ -235,7 +240,7 @@ function userAttack() {
         userLevelUp();
     }
 }
-function buyEquip(e) {
+let buyEquip = (e) => {
     var target = e.target || e.srcElement;
     var equipped = document.querySelector(".equipped");
     for(var i = 0; i<shopList.length;i++) {
