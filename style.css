@@ -117,7 +117,7 @@ footer {
     pointer-events: all;
     z-index: 100;
 }
-#game-over-o {
+#game-over {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -125,13 +125,13 @@ footer {
     width: 100%;
     text-align: center;
 }
-#game-over {
+#o-text {
     color: white;
     font-size: 12rem;
     line-height: 0.8;
     margin-bottom: 30px;
 }
-#game-over-o p {
+#game-over p {
     color: white;
     font-size: 4rem;
     line-height: 0.9;
@@ -150,4 +150,24 @@ footer {
 }
 .gold {
     color: #eee8aa;
-} 
+}
+#noSupport {
+    position: fixed;
+    z-index: -1;
+    opacity: 0;
+    visibility: hidden;
+    color: white;
+    text-align: center;
+    background: black;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    left: 0;
+}
+@media only screen and (max-width: 1024px) {
+    #noSupport {
+        z-index: 101;
+        opacity: 1;
+        visibility: visible;
+    }
+}

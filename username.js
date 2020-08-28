@@ -1,5 +1,5 @@
-var username = document.getElementById("username-ex");
-var EYU = prompt("Enter your username");
+const username = document.querySelector("#username-ex");
+const EYU = prompt("Enter your username");
 if (EYU === "") {
     if(alert("Please enter your username to start the game!")){}
     else {
